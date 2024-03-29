@@ -1,9 +1,8 @@
 const { Telegraf } = require('telegraf');
-//const bot = new Telegraf(process.env.BOT_TOKEN);
 const predictions = require('./predictions');
 //require('dotenv').config();
 
-const bot = new Telegraf(BOT_TOKEN);
+const bot = new Telegraf(process.env.BOT_TOKEN);
 
 // Define a command handler
 // bot.command('start', (ctx) => {
