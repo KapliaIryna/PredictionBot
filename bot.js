@@ -1,21 +1,23 @@
 const { Telegraf } = require('telegraf');
 const predictions = require('./predictions');
+
+const port = process.env.PORT || 80;
 //require('dotenv').config();
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
 // Define a command handler
-// bot.command('start', (ctx) => {
-//     console.log('Received /start command');
-//     try {
-//         const randomIndex = Math.floor(Math.random() * predictions.length);
-//         const randomMessage = predictions[randomIndex];
-//         ctx.reply(randomMessage);
-//     } catch (error) {
-//         console.error('Error sending message:', error);
-//         ctx.reply('An error occurred while sending the message.');
-//     }
-// });
+bot.command('start', (ctx) => {
+    console.log('Received /start command');
+    // try {
+    //     const randomIndex = Math.floor(Math.random() * predictions.length);
+    //     const randomMessage = predictions[randomIndex];
+    //     ctx.reply(randomMessage);
+    // } catch (error) {
+    //     console.error('Error sending message:', error);
+    //     ctx.reply('An error occurred while sending the message.');
+    // }
+});
 
 // Define an inline query handler
 bot.on('inline_query', query => {
@@ -45,10 +47,18 @@ bot.on('inline_query', query => {
 // });
 
 // Start the bot
+
+
 try {
     console.log('Launching bot...');
-    bot.launch();
-    console.log('Bot launched successfully');
+    // bot.launch();
+    bot.launch({
+    webhook: {
+        domain: "prediction-bot.onrender.com",
+        port: port,
+    }
+})
+console.log('Bot launched successfully');
 } catch (error) {
     console.error('Error during bot initialization:', error);
 }
