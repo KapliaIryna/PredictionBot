@@ -22,6 +22,7 @@ bot.command('start', (ctx) => {
 // Define an inline query handler
 bot.on('inline_query', query => {
     try {
+        console.log("Inline query");
         const randomIndex = Math.floor(Math.random() * predictions.length);
         const randomMessage = predictions[randomIndex];
         
